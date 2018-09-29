@@ -1,2 +1,37 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="container">
+<h1>WORD WALL</h1>
+
+<div class="col-md-6">
+    <div class="well">
+      <h1>Look up a word</h1>
+      <p>Type in a word and get its first definition, courtesy of the Oxford English Dictionary. Sorry, at this time accent marks and other special characters won't work.</p>
+      <div>
+        <%= form_tag index_path do %>
+        <%= text_field_tag :word, nil, placeholder: "type your word", class: "form-control" %><br/>
+        <%= submit_tag "Look it Up", class: "btn btn-primary" %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+      <!-- Bring in the instance variable from our controller to display on our index page. -->
+      <!-- Check to make sure @location is not empty or nil and that the API did not return an error -->
+      <% if :word != nil %>
+        <h1>Definition for <%= @word %></h1>
+        <div class="row">
+          <div class="col-md-7">
+            <!-- <p><%= @definition%></p> -->
+            <p>Inflection:<%=@inflection%></p>
+            <p>Definition:<%=@definition%></p>
+          </div>
+        </div>
+        <% elsif @status == "404" %>
+          <p>Error:<%= @error %>. Please Try Again.</p>
+        <% else %>
+          <p>Enter a word to get the definition!</p>
+        <% end %>
+  </div>
+</div>
+</div>

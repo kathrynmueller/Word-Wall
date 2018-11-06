@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  resources :words
+  root 'words#new'
 
   # get 'home/index'
+  get 'wordwall' => 'words#wordwall'
   get 'index' => 'home#index' 
-  post 'index' => 'home#index' 
+  post '/' => 'words#new' 
+  post 'index' => 'home#index'
 
   get 'home/test'
 

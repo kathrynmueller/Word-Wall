@@ -1,0 +1,9 @@
+<div>
+	<%= render 'form', word: @word %>
+</div>
+
+<div>
+	<% @words.each do |word| %>
+        <p><%= word.word %></p>
+    <% end %>
+</div>

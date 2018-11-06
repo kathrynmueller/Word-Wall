@@ -1,5 +1,8 @@
 class HomeController < ApplicationController
   def index
+
+  	past_searches = []
+
   	if params[:word].present?
   		parameters = {
       headers: {
@@ -9,19 +12,22 @@ class HomeController < ApplicationController
         }
       }
     lemmatron = HTTParty.get("https://od-api.oxforddictionaries.com:443/api/v1/inflections/en/#{params[:word]}", parameters)
+    # @grammatical_feature = lemmatron['results'][0]['lexicalEntries'][0]['grammaticalFeatures'][0]['text']
     @inflection = lemmatron['results'][0]['lexicalEntries'][0]['inflectionOf'][0]['text']
 	    if @inflection == params[:word]
 	    	response = HTTParty.get("https://od-api.oxforddictionaries.com:443/api/v1/entries/en/#{params[:word]}", parameters)
     		@definition = response['results'][0]['lexicalEntries'][0]['entries'][0]['senses'][0]['definitions'][0]
+    	
     	elsif @inflection != params[:word]
     		response = HTTParty.get("https://od-api.oxforddictionaries.com:443/api/v1/entries/en/#{@inflection}", parameters)
     		@definition = response['results'][0]['lexicalEntries'][0]['entries'][0]['senses'][0]['definitions'][0]
-  
-    			
+    					
  
 	    end
     # response = HTTParty.get("https://od-api.oxforddictionaries.com:443/api/v1/entries/en/#{params[:word]}", parameters)
     # @definition = response['results'][0]['lexicalEntries'][0]['entries'][0]['senses'][0]['definitions'][0]
+
+
  	end
   end
 

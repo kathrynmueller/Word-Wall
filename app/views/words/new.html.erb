@@ -2,24 +2,18 @@
 
 <%= render 'form', word: @word %>
 
-			  	<div class="card">
-				      <!-- Bring in the instance variable from our controller to display on our index page. -->
-				      <!-- Check to make sure @location is not empty or nil and that the API did not return an error -->
-				      <% if :word != nil %>
-				        <h1>Definition for <%= @new_word %></h1>
-				        <div class="row">
-				          <div class="col-md-7">
-				            <!-- <p><%= @definition%></p> -->
-				          
-				            <p>Definition:<%=@definition%></p>
-				          </div>
-				        </div>
-				        <% elsif @status == "404" %>
-				          <p>Error:<%= @error %>. Please Try Again.</p>
-				        <% else %>
-				          <p>Enter a word to get the definition!</p>
-				        <% end %>
-				</div>
+<div class="card">
+  <% if @response != nil %>
+    <h1>Definition for <%= @new_word %></h1>
+    <div class="row">
+      <div class="col-md-7">
+        <p><%=@definition%></p>
+      </div>
+    </div>
+    <% else %>
+      <p>Your definition will appear here.</p>
+    <% end %>
+</div>
 
 <div class="card">
 	<h2>Your Word Wall</h2>

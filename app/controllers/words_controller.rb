@@ -16,7 +16,9 @@ class WordsController < ApplicationController
   def new
     @word = Word.new
     @words = Word.all.order("created_at DESC")
-    @new_word = Word.last.word
+    if Word.last.present?
+      @new_word = Word.last.word
+    end
     @definition = "You did it!"
 
     parameters = {
@@ -27,9 +29,11 @@ class WordsController < ApplicationController
         }
       }
     
-        response = HTTParty.get("https://od-api.oxforddictionaries.com:443/api/v1/entries/en/#{@new_word}", parameters)
-        @definition = response['results'][0]['lexicalEntries'][0]['entries'][0]['senses'][0]['definitions'][0]
-
+        if Word.last.present?   
+        @response = HTTParty.get("https://od-api.oxforddictionaries.com:443/api/v1/entries/en/#{@new_word}", parameters)
+        
+          @definition = @response['results'][0]['lexicalEntries'][0]['entries'][0]['senses'][0]['definitions'][0]
+        end
         
   end
 

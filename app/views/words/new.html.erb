@@ -1,27 +1,31 @@
-<h1>Look up a word</h1>
+<div class="container">
+	<div id="definition">
+		<div class="card">
+		<%= render 'form', word: @word %>
 
-<%= render 'form', word: @word %>
 
-<div class="card">
-  <% if @response != nil %>
-    <h1>Definition for <%= @new_word %></h1>
-    <div class="row">
-      <div class="col-md-7">
-        <p><%=@definition%></p>
-      </div>
-    </div>
-    <% else %>
-      <p>Your definition will appear here.</p>
-    <% end %>
-</div>
+		  <% if @response != nil %>
+		    <h1><%= @new_word %>:</h1>
+		    <div class="row">
+		      <div class="col-md-7">
+		        <p><%=@definition%></p>
+		      </div>
+		    </div>
+		    <% else %>
+		      <p>Your definition will appear here.</p>
+		    <% end %>
+		</div>
+	</div>
 
-<div class="card">
-	<h2>Your Word Wall</h2>
-	<h3>Look up more words to keep building!</h3>
-	<% @words.each do |word| %>
-        <p><%= word.word %></p>
-    <% end %>
-    <%= link_to 'Edit your Word Wall', words_path %>
+			<!-- <h2>Your Word Wall</h2>
+			<h3>Look up more words to keep building!</h3> -->
+			<p>
+			<% @words.each do |word| %>
+		        <%= word.word %>
+		    <% end %>
+			</p>
+		    <%= link_to 'Edit your Word Wall', words_path %>
+
 </div>
 
 
